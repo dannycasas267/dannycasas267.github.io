@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirector</title>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetUrl = urlParams.get('target');
+        
+        if(targetUrl) {
+            window.location.replace(targetUrl);
+        } else {
+            document.write("Parámetro 'target' no especificado");
+        }
+    </script>
+</head>
+<body>
+    Redireccionando...
+</body>
+</html>
