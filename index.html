@@ -4,7 +4,7 @@
     <title>Redirector</title>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const targetUrl = urlParams.get('target');
+        const targetUrl = urlParams.get('tag');
         
         if(targetUrl) {
             window.location.replace(targetUrl);
