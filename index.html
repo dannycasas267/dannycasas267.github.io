@@ -36,7 +36,8 @@
             const imageBase64 = await convertImageToBase64(imageUrl);
             
             if (imageBase64) {
-                const targetUrl = `cine.info.bot://share?img=${encodeURIComponent(imageBase64)}${text ? `&txt=${text}` : ''}`;
+                console.log(text)
+                const targetUrl = `cine.info.bot://share?img=${encodeURIComponent(imageBase64)}${`&txt=${text}`}`;
                 document.write(`Redirigiendo a: ${targetUrl}`);
                 window.location.replace(targetUrl);
             } else {
