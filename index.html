@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Convertidor URL a Base64</title>
+    <title>Redirector</title>
     <script>
         async function convertImageToBase64(imageUrl) {
             try {
@@ -36,7 +36,7 @@
             const imageBase64 = await convertImageToBase64(imageUrl);
             
             if (imageBase64) {
-                const targetUrl = `cine.info.bot://share?img=${encodeURIComponent(imageBase64)}${text ? `&txt=${encodeURIComponent(text)}` : ''}`;
+                const targetUrl = `cine.info.bot://share?img=${imageBase64}${text ? `&txt=${text}` : ''}`;
                 document.write(`Redirigiendo a: ${targetUrl}`);
                 window.location.replace(targetUrl);
             } else {
