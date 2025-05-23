@@ -3,51 +3,24 @@
 <head>
     <title>Redirector</title>
     <script>
-        async function convertImageToBase64(imageUrl) {
-            try {
-                const response = await fetch(imageUrl);
-                if (!response.ok) throw new Error('Error al cargar la imagen');
-                const blob = await response.blob();
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        const result = reader.result;
-                        resolve(result.split(',')[1]); // Elimina el prefijo data:image/...;base64,
-                    };
-                    reader.onerror = reject;
-                    reader.readAsDataURL(blob);
-                });
-            } catch (error) {
-                console.error("Error en convertImageToBase64:", error);
-                document.write("Error al procesar la imagen: " + error.message);
-                return null;
-            }
-        }
-
         async function redirect() {
             const urlParams = new URLSearchParams(window.location.search);
             const imageUrl = urlParams.get('img');
-            const text = urlParams.get('txt'); // Texto ya codificado (Base64URL)
-            
-            // Validación básica
+            const text = urlParams.get('txt');
+
             if (!imageUrl || !text) {
                 document.write("Error: Faltan parámetros en la URL");
                 return;
             }
 
             try {
-                const imageBase64 = await convertImageToBase64(imageUrl);
-                if (!imageBase64) return;
-
-                // Construye la URL final SIN codificar el texto nuevamente
-                const targetUrl = `cine.info.bot://share?img=${encodeURIComponent(imageBase64)}&txt=${text}`;
+                const targetUrl = `cine.info.bot://share?img=${imageUrl}&txt=${text}`;
                 
-                console.log("URL de redirección:", targetUrl); // Para depuración
+                console.log("URL de redirección:", targetUrl);
                 document.write(`Redirigiendo a la app...`);
                 
                 window.location.href = targetUrl;
                 
-                // Fallback si la redirección falla
                 setTimeout(() => {
                     document.body.innerHTML += "<p>Si no se redirige, verifica que la app esté instalada.</p>";
                 }, 1500);
