@@ -2,38 +2,16 @@
 <html>
 <head>
     <title>Redirector</title>
-    <script>
-        async function redirect() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const imageUrl = urlParams.get('img');
-            const text = urlParams.get('txt');
-
-            if (!imageUrl || !text) {
-                document.write("Error: Faltan parámetros en la URL");
-                return;
-            }
-
-            try {
-                const targetUrl = `cine.info.bot://share?img=${imageUrl}&txt=${text}`;
-                
-                console.log("URL de redirección:", targetUrl);
-                document.write(`Redirigiendo a la app...`);
-                
-                window.location.href = targetUrl;
-                
-                setTimeout(() => {
-                    document.body.innerHTML += "<p>Si no se redirige, verifica que la app esté instalada.</p>";
-                }, 1500);
-                
-            } catch (error) {
-                console.error("Error en redirect:", error);
-                document.write("Error crítico: " + error.message);
-            }
-        }
-        
-        window.onload = redirect;
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container" id="container">
+        <div class="loading-spinner"></div>
+        <h1>Redireccionando a la aplicación</h1>
+        <div class="message">Por favor espera, estamos intentando abrir la aplicación...</div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
